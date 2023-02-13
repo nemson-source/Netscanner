@@ -3,9 +3,13 @@ This is a simple node.js newtwork scanner that will loock for responding ip's an
 
 to use unzip the file named node_modules then start the file scan.bat at the end of the scan it will open and creat the following files
 responding.txt
+
 openport.json
+
 nonresponding.txt (this file will not automaticli open)
+
 log.txt (this file will not automaticli open)
+
 
 Features are
 gives the responding ip's with Respons time
