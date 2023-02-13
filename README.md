@@ -16,7 +16,7 @@ gives the responding ip's with Respons time
 gives the non responding ip's
 and it gives the open ports on every responding device with the ports usage
 
-to change the IP open the index.js file and change the IP in this
+to change the IP open the index.js file and change the IP in this (defaut ip is 192.168.0.1)
 
 ```
 for (let i = 1; i <= 255; i++) {
@@ -37,7 +37,7 @@ for (let i = 1; i <= 255; i++) {
     });
 }
 ```
-to change the port scan range change this code
+to change the port scan range change this code (defauld port range is 1000)
 ```
 const scanPorts = (ip) => {
   for (let port = 1; port <= 1000; port++) {
