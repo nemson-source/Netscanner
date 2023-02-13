@@ -4,6 +4,7 @@ to use unzip the file named node_modules then start the file scan.bat at the end
 responding.txt
 openport.json
 nonresponding.txt (this file will not automaticli open)
+log.txt (this file will not automaticli open)
 
 Features are
 gives the responding ip's with Respons time
