@@ -11,35 +11,65 @@ const responding = [];
 const nonResponding = [];
 const openPorts = {};
 
-const printResults = () => {
-  console.log('clearing files')
-  console.log('writing to files')
-  console.log(`Number of responding IP addresses: ${responding.length}`);
-  fs.writeFileSync('responding.txt', responding.join('\n'));
-  fs.writeFileSync('nonResponding.txt', nonResponding.join('\n'));
-  fs.writeFileSync('openPorts.json', JSON.stringify(openPorts, null, 2));
-  fs.writeFileSync('log.txt', `scan fait le ${new Date()} nombre de reponce: ${responding.length}\n\n`);
-  console.log('scan is done results are in the folwoing files nonResponding.txt, responding.txt and openPorts.json')
-  setTimeout(() => {
-    console.log('opening files')
-    exec('start responding.txt', (err, stdout, stderr) => {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      console.log(stdout);
+console.log('Enter the start IP address:');
+readline.question('', (startIP) => {
+  console.log('Enter the end IP address:');
+  readline.question('', (endIP) => {
+    console.log('Enter the start port:');
+    readline.question('', (startPort) => {
+      console.log('Enter the end port:');
+      readline.question('', (endPort) => {
+        console.log('Starting IP scan...');
+        scanPorts(startIP, endIP, startPort, endPort);
+        readline.close();
+      });
     });
-    exec('start openPorts.json', (err, stdout, stderr) => {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      console.log(stdout);
+  });
+});
+
+const scanPorts = (startIP, endIP, startPort, endPort) => {
+  const startOctets = startIP.split('.');
+  const endOctets = endIP.split('.');
+  const startIPRange = parseInt(startOctets[3]);
+  const endIPRange = parseInt(endOctets[3]);
+
+  for (let i = startIPRange; i <= endIPRange; i++) {
+    const host = `${startOctets[0]}.${startOctets[1]}.${startOctets[2]}.${i}`;
+
+    ping.promise.probe(host)
+      .then(res => {
+        if (res.alive) {
+          responding.push(`${res.host}: ${res.time} ms`);
+          scanOpenPorts(res.host, startPort, endPort);
+        } else {
+          nonResponding.push(res.host);
+        }
+
+        if (responding.length + nonResponding.length === (endIPRange - startIPRange + 1)) {
+          printResults();
+        }
+      });
+  }
+  console.log('IP scan complet')
+  console.log('staring port scan')
+};
+
+const scanOpenPorts = (ip, startPort, endPort) => {
+  for (let port = startPort; port <= endPort; port++) {
+    const socket = new net.Socket();
+
+    socket.on('error', (err) => {
+      socket.destroy();
     });
-  }, 3000)
-  setTimeout(() => {
-    process.exit()
-  }, 10000)
+
+    socket.on('connect', () => {
+      openPorts[ip] = openPorts[ip] || [];
+      openPorts[ip].push({ port: port, function: getPortFunction(port) });
+      socket.end();
+    });
+
+    socket.connect(port, ip);
+  }
 };
 
 const getPortFunction = (port) => {
@@ -245,57 +275,33 @@ const getPortFunction = (port) => {
   }
 }
 
-console.log('Enter the start IP address:');
-readline.question('', (startIP) => {
-  console.log('Enter the end IP address:');
-  readline.question('', (endIP) => {
-    console.log('Starting IP scan...');
-    scanPorts(startIP, endIP);
-    readline.close();
-  });
-});
-
-const scanPorts = (startIP, endIP) => {
-  const startOctets = startIP.split('.');
-  const endOctets = endIP.split('.');
-  const start = parseInt(startOctets[3]);
-  const end = parseInt(endOctets[3]);
-
-  for (let i = start; i <= end; i++) {
-    const host = `${startOctets[0]}.${startOctets[1]}.${startOctets[2]}.${i}`;
-
-    ping.promise.probe(host)
-      .then(res => {
-        if (res.alive) {
-          responding.push(`${res.host}: ${res.time} ms`);
-          scanOpenPorts(res.host);
-        } else {
-          nonResponding.push(res.host);
-        }
-
-        if (responding.length + nonResponding.length === (end - start + 1)) {
-          printResults();
-        }
-      });
-  }
-  console.log('IP scan complet')
-  console.log('staring port scan')
-};
-
-const scanOpenPorts = (ip) => {
-  for (let port = 1; port <= 1000; port++) {
-    const socket = new net.Socket();
-
-    socket.on('error', (err) => {
-      socket.destroy();
+const printResults = () => {
+  console.log('clearing files')
+  console.log('writing to files')
+  console.log(`Number of responding IP addresses: ${responding.length}`);
+  fs.writeFileSync('responding.txt', responding.join('\n'));
+  fs.writeFileSync('nonResponding.txt', nonResponding.join('\n'));
+  fs.writeFileSync('openPorts.json', JSON.stringify(openPorts, null, 2));
+  fs.writeFileSync('log.txt', `scan fait le ${new Date()} nombre de reponce: ${responding.length}\n\n`);
+  console.log('scan is done results are in the folwoing files nonResponding.txt, responding.txt and openPorts.json')
+  setTimeout(() => {
+    console.log('opening files')
+    exec('start responding.txt', (err, stdout, stderr) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      console.log(stdout);
     });
-
-    socket.on('connect', () => {
-      openPorts[ip] = openPorts[ip] || [];
-      openPorts[ip].push({ port: port, function: getPortFunction(port) });
-      socket.end();
+    exec('start openPorts.json', (err, stdout, stderr) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      console.log(stdout);
     });
-
-    socket.connect(port, ip);
-  }
+  }, 3000)
+  setTimeout(() => {
+    process.exit()
+  }, 10000)
 };
