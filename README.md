@@ -2,7 +2,7 @@ This is a simple node.js newtwork scanner that will loock for responding ip's an
 
 to use it make shure that you have node.js installd if not you can install it here https://nodejs.org/en/
 
-to use unzip the file named node_modules then start the file scan.bat and imput the start ip and end ip in the console and at the end of the scan it will open and creat the following files
+to use unzip the file named node_modules then start the file scan.bat and imput the start ip and end ip aswell the start and end port in the console and at the end of the scan it will open and creat the following files
 responding.txt
 
 openport.json
@@ -16,24 +16,3 @@ Features are
 gives the responding ip's with Respons time
 gives the non responding ip's
 and it gives the open ports on every responding device with the ports usage
-
-to change the port scan range change this code (defauld port range is 1000)
-```
-const scanPorts = (ip) => {
-  for (let port = 1; port <= 1000; port++) {
-    const socket = new net.Socket();
-
-    socket.on('error', (err) => {
-      socket.destroy();
-    });
-
-    socket.on('connect', () => {
-      openPorts[ip] = openPorts[ip] || [];
-      openPorts[ip].push({ port: port, function: getPortFunction(port) });
-      socket.end();
-    });
-
-    socket.connect(port, ip);
-  }
-};
-```
