@@ -1,6 +1,6 @@
 This is a simple node.js newtwork scanner that will loock for responding ip's and open ports
 
-to use it make shure that you have node.js installd if not you can install it here https://nodejs.org/en/
+To begin make shure that you have node.js installd if not you can install it here https://nodejs.org/en/
 
 to use unzip the file named node_modules then start the file scan.bat and imput the start ip and end ip aswell the start and end port in the console and at the end of the scan it will open and creat the following files
 responding.txt
