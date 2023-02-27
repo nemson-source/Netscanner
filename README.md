@@ -15,5 +15,7 @@ log.txt (this file will not automaticli open)
 Features are
 
 gives the responding ip's with Respons time
+
 gives the non responding ip's
+
 and it gives the open ports on every responding device with the ports usage
