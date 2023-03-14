@@ -1,3 +1,4 @@
+# open-netscan
 This is a simple node.js newtwork scanner that will loock for responding ip's and open ports
 
 To begin make shure that you have node.js installd if not you can install it here https://nodejs.org/en/
