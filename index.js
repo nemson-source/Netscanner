@@ -51,8 +51,9 @@ readline.question('', (startIP) => {
       });
     });
   });
-});
+})
 
+console.log('starting IP scan...')
 const scanPorts = (startIP, endIP, startPort, endPort) => {
   const startOctets = startIP.split('.');
   const endOctets = endIP.split('.');
@@ -73,6 +74,7 @@ const scanPorts = (startIP, endIP, startPort, endPort) => {
 
         if (responding.length + nonResponding.length === (endIPRange - startIPRange + 1)) {
           printResults();
+          console.log('now pinging ')
         }
       });
   }
