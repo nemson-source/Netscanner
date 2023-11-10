@@ -102,6 +102,10 @@ const getPortFunction = (port) => {
   switch (port) {
     case 1:
         return "TCPMUX";
+    case 2:
+        return "compressnet (Management Utility)";
+    case 3:
+        return "compressnet (Compression Process)";
       case 5:
         return "RJE";
       case 7:
@@ -112,6 +116,8 @@ const getPortFunction = (port) => {
         return "systat";
       case 13:
         return "daytime";
+      case 15:
+        return "Previously netstat service"
       case 17:
         return "qotd";       
       case 18:
@@ -130,10 +136,18 @@ const getPortFunction = (port) => {
         return "SMTP";
       case 29:
         return "MSG ICP";
+      case 31:
+        return "msg-auth";
+      case 33:
+        return "DSP";
       case 37:
-        return "Time";
+        return "Time Protocol";
+      case 39:
+        return "RLP";
+      case 41:
+        return "graphics";
       case 42:
-        return "nameserver";
+        return "Host Name Server Protocol";
       case 43:
         return "WHOIS";
       case 49:
