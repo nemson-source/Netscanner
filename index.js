@@ -51,8 +51,8 @@ readline.question('', (startIP) => {
   });
 });
 
-console.log('starting IP scan...')
 const scanPorts = (startIP, endIP, startPort, endPort) => {
+  console.log('starting IP scan...')
   const startOctets = startIP.split('.');
   const endOctets = endIP.split('.');
   const startIPRange = parseInt(startOctets[3]);
