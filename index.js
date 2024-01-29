@@ -43,7 +43,6 @@ readline.question('', (startIP) => {
     readline.question('', (startPort) => {
       console.log('Enter the end port(puting in a larg number can cause them not to be writen in the file and console safe numer is 3000):');
       readline.question('', (endPort) => {
-        console.log('Starting IP scan...');
         scanPorts(startIP, endIP, startPort, endPort);
         readline.close();
       });
