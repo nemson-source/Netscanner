@@ -404,7 +404,7 @@ const printResults = () => {
   fs.writeFileSync('responding.txt', responding.join('\n'));
   fs.writeFileSync('nonResponding.txt', nonResponding.join('\n'));
   fs.writeFileSync('openPorts.json', JSON.stringify(openPorts, null, 2));
-  fs.appendFile('log.txt', `scan fait le ${new Date()} nombre de reponce: ${responding.length}\n\n`, (err) => {
+  fs.appendFile('log.txt', `scan made at ${new Date()} number of responces: ${responding.length}\n\n`, (err) => {
     if (err) throw err;
   });
   console.log('scan is done results are in the folwoing files nonResponding.txt, responding.txt and openPorts.json')
