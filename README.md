@@ -7,12 +7,16 @@ Download the latest release of the net scanner from the GitHub repository. You c
 git clone https://github.com/nemson-source/Netscanner.git
 
 Step 2: Install Required Libraries
-Open a command prompt or terminal window and navigate to the directory where you extracted the release files. Run the following commands to install the required libraries: ``
-npm install net \n
-npm install fs
-npm install ping
-npm install readline
-``
+Open a command prompt or terminal window and navigate to the directory where you extracted the release files. Run the following commands to install the required libraries:
+
+``npm install net``
+
+``npm install fs``
+
+``npm install ping``
+
+``npm install readline``
+
 These commands will install the necessary Node.js libraries (net, fs, ping, and readline) that the net scanner relies on.
 
 Step 3: Start the Scan
