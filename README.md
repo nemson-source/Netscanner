@@ -1,9 +1,9 @@
 ## Netscanner
 This is a simple node.js newtwork scanner that will loock for responding ip's and open ports
-git clone https://github.com/nemson-source/Netscanner.git
 
 Step 1: Download the Release
 Download the latest release of the net scanner from the GitHub repository. You can usually find the release files in a zip format. Once the download is complete, unzip the release files to a directory of your choice.
+git clone https://github.com/nemson-source/Netscanner.git
 
 Step 2: Install Required Libraries
 Open a command prompt or terminal window and navigate to the directory where you extracted the release files. Run the following commands to install the required libraries: ``
