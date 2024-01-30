@@ -1,4 +1,4 @@
-# Netscanner
+## Netscanner
 This is a simple node.js newtwork scanner that will loock for responding ip's and open ports
 git clone https://github.com/nemson-source/Netscanner.git
 
