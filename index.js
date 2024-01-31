@@ -34,7 +34,6 @@ const getLocalIpAddress = () => {
 };
 
 console.log(`Local IP address: ${getLocalIpAddress()}`);
-
 console.log('Enter the start IP address:');
 readline.question('', (startIP) => {
   console.log('Enter the end IP address:');
